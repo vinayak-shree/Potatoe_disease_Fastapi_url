@@ -11,7 +11,8 @@ import os
 
 app = FastAPI()
 
-origins = ["http://localhost",
+origins = ["https://potatoe-disease-fastapi-url.onrender.com",
+           "http://localhost",
            "http://localhost:3000",
            ]
 
