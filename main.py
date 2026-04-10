@@ -6,6 +6,9 @@ from PIL import Image
 import tensorflow as tf
 from fastapi.middleware.cors import CORSMiddleware
 from tensorflow.keras.models import load_model
+import os
+
+
 app = FastAPI()
 
 origins = ["http://localhost",
@@ -21,7 +24,7 @@ app.add_middleware(
 )
 
 
-MODEL = load_model(r"C:\Users\User\Downloads\DataScience\Potatoe disease finder\saved_models\potatoes.h5" , compile=False)
+MODEL = load_model("potatoes.h5" , compile=False)
 CLASS_NAMES = ["Early Blight" , "Late Blight" , "Healthy"]
 
 @app.get("/ping")
@@ -50,5 +53,6 @@ async def predict(
 }
     #to run this server use uvicorn
 if __name__ == "__main__":
-    uvicorn.run(app , host = "localhost" , port = 8000)
+           port = int(os.environ.get("PORT" , 8000))
+           uvicorn.run(app , host = "localhost" , port = port)
 
